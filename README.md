@@ -1,15 +1,22 @@
 # JUN_WE_24-
- Project Name - SWITCH/ Unique Social Media Platform
-Batch - Y2_S2_WD_IT_02.02
+ Project Name - 
+ 
+SWITCH/ Unique Social Media Platform
+
+Batch - 
+
+Y2_S2_WD_IT_02.02
 
 ![table](https://github.com/Achinika/JUN_WE_24-SWITCH/assets/95092298/7f8c0d3b-868e-4041-8c25-57ce9b1d89b8)
 
 
 Brief Description of Project -
+
 The Project is done as per the requirements outlined by the SLIIT. This  unique social media platform is created to carter the needs of general users, employers/organizations, businesses, and consultants to connect  with the competitive Job Market.
 The platform aims to provide a comprehensive set of features to facilitate networking, job search, advertising, and communication among users. 
 
 The system Unique features are-
+
 ➢ Rideshaing- search for people to share rides, facilitating transportation 
 arrangements among users.
 ➢ Candidate Shortlisting- automatically shortlist candidates based on predefined criteria set by the organization. 
