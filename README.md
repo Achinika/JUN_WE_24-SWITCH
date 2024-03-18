@@ -18,7 +18,9 @@ The system Unique features are-
 
 ➢ Rideshaing- search for people to share rides, facilitating transportation 
 arrangements among users.
+
 ➢ Candidate Shortlisting- automatically shortlist candidates based on predefined criteria set by the organization. 
+
 ➢ Course Enrolling- automatically shortlist candidates based on predefined criteria set by the organization.
 
 
