@@ -4,7 +4,7 @@
 
 Batch - 
 
-Y2_S2_WD_IT_02.02
+Y3_S2_WE_IT_01.02
 
 ![table](https://github.com/Achinika/JUN_WE_24-SWITCH/assets/95092298/7f8c0d3b-868e-4041-8c25-57ce9b1d89b8)
 
