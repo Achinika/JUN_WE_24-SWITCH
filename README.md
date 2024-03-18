@@ -1,7 +1,6 @@
-# JUN_WE_24-
- Project Name - 
+# Project Name - SWITCH/ Unique Social Media Platform
  
-SWITCH/ Unique Social Media Platform
+
 
 Batch - 
 
