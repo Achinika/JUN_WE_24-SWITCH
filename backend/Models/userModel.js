@@ -1,4 +1,4 @@
-import mongoose from "mongoose"
+import mongoose from "mongoose";
 
 const UserSchema = mongoose.Schema(
     {
@@ -23,6 +23,11 @@ const UserSchema = mongoose.Schema(
                 /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
                 "Please enter a valid email"]
         },
+        accountType:{
+            type: String,
+            enum: ['regular','general', 'employer', 'consultant', 'business'],
+            
+        }
 
     },{timestamps: true}
 );
