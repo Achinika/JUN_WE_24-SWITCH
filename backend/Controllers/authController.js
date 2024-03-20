@@ -18,7 +18,9 @@ try{
     const newUser = new UserModel({
         userName, 
         password: hashedPass,
-        email});
+        email,
+        accountType: 'regular' // Set a default value for accountType
+    });
 
     
    await newUser.save(); // Save the new user to the database
