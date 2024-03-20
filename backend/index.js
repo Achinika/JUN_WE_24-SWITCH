@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import mongoose  from 'mongoose';
 import dotenv from 'dotenv';
 import AuthRoute from './Routes/AuthRoute.js'
+import businessRoute from './Routes/businessRoute.js'
 
 //Routes
 
@@ -29,3 +30,4 @@ mongoose.connect(process.env.MONGO_DB)
 
 //usage of routes
 app.use('/auth',AuthRoute)
+app.use('/business',businessRoute)
