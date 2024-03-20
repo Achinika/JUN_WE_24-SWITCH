@@ -15,6 +15,7 @@ router.post ('/login', loginUser)
 
 
 
+
 //FOR EMPLOYERS
 router.get('/switchEmployer/:userId', updateToEmployer);
 router.post('/switchEmployer/:userId', updateToEmployer); //add form data
