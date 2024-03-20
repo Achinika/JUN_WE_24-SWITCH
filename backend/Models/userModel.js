@@ -23,6 +23,11 @@ const UserSchema = mongoose.Schema(
                 /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
                 "Please enter a valid email"]
         },
+        accountType:{
+            type: String,
+            enum: ['general', 'employer', 'consultant', 'business'],
+            required: true
+        }
 
     },{timestamps: true}
 );
