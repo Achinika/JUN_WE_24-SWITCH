@@ -53,6 +53,8 @@ app.get('/auth/switchEmployer/:userId', async(req, res) => {
     }
 });
 
+
+
 // Handle undefined routes
 app.use((req, res, next) => {
     res.status(404).send("Sorry can't find that!");
