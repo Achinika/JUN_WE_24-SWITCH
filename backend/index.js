@@ -28,6 +28,8 @@ app.use('/auth',AuthRoute);
 
 
 
+
+
 // ///// Define the route for switching to employer account ///////////////////////////////////////////////////////////////
 
 app.get('/auth/switchEmployer/:userId', async(req, res) => {
@@ -56,6 +58,8 @@ app.get('/auth/switchEmployer/:userId', async(req, res) => {
 
 
 
+
+
 /////// Define the route for switching to Business account ///////////////////////////////////////////////////////////////
 
 app.get('/auth/switchBusiness/:userId', async(req, res) => {
@@ -81,6 +85,8 @@ app.get('/auth/switchBusiness/:userId', async(req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
+
+
 
 
 // Handle undefined routes
