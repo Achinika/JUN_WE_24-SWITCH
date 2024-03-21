@@ -34,8 +34,4 @@ router.get('/:userId', getEmployer); //get a Employer
 
 
 
-
-
-
-
 export default router
