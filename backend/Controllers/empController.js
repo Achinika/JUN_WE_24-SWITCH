@@ -40,19 +40,23 @@ export const updateToEmployer = async (req, res) => {
     }
 };
 
-//get a Employer
+//get a Employer 
 export const getEmployer = async (req,res) =>{
     const userId = req.params.userId;
 
     try {
-        const emp = await EmployerModel.findById(userId);
-
+        const emp = await EmployerModel.findOne({ user: userId });
         if(emp)
         {
-            res.status(200).json(emp);
+            //remove the pw from the response
+            const {password, ...otherDetails} =emp._doc
+            res.status(200).json(otherDetails);
+        }
+        else{
+            res.status(404).json({ message: "Employer not found" });
         }
 
     } catch (error) {
-        res.status(500).json(error)
+        res.status(500).json({message: error.message});
     }
 };
