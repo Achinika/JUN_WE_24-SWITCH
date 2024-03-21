@@ -28,12 +28,7 @@ app.use('/auth',AuthRoute);
 
 
 
-<<<<<<< HEAD
 // Define the route for switching to employer account
-=======
-// ///// Define the route for switching to employer account ///////////////////////////////////////////////////////////////
-
->>>>>>> parent of 63ebeb0 (add space)
 app.get('/auth/switchEmployer/:userId', async(req, res) => {
     const userId = req.params.userId;
 
@@ -58,38 +53,6 @@ app.get('/auth/switchEmployer/:userId', async(req, res) => {
     }
 });
 
-<<<<<<< HEAD
-=======
-
-
-/////// Define the route for switching to Business account ///////////////////////////////////////////////////////////////
-
-app.get('/auth/switchBusiness/:userId', async(req, res) => {
-    const userId = req.params.userId;
-
-    try {
-        //find user by id
-        const user = await UserModel.findById(userId).select('isBusiness');
-        
-        if(!user){
-            return  res.status(404).json ({message: 'User Not Found'});
-        }
-
-        //update user account to employer
-        user.accountType = 'Business';
-
-        //save update user data
-        await user.save();
-        res.status(200).json({ message: 'User account switched to Business' });
-
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Internal server error' });
-    }
-});
-
-
->>>>>>> parent of 63ebeb0 (add space)
 // Handle undefined routes
 app.use((req, res, next) => {
     res.status(404).send("Sorry can't find that!");
