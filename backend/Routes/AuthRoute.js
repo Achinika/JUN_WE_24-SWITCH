@@ -1,6 +1,6 @@
 import express from "express";
 import { registerUser,loginUser } from "../Controllers/authController.js";
-import { updateToEmployer } from '../Controllers/empController.js';
+////import { updateToEmployer } from '../Controllers/empController.js';
 import { updateToBusiness } from '../Controllers/businessController.js';
 
 
@@ -18,8 +18,8 @@ router.post ('/login', loginUser)
 
 
 //FOR EMPLOYERS
-router.get('/switchEmployer/:userId', updateToEmployer);
-router.post('/switchEmployer/:userId', updateToEmployer); //add form data
+////router.get('/switchEmployer/:userId', updateToEmployer);
+////router.post('/switchEmployer/:userId', updateToEmployer); //add form data
 
 
 
