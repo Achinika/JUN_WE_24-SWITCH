@@ -37,7 +37,11 @@ const EmpSchema = mongoose.Schema(
         description: {
             type: String,
             required: true
-        }
+        },
+        profilePic: String,
+        coverPic:  String,
+        followings: [],
+        followers: []
     },
     { timestamps: true }
 );
