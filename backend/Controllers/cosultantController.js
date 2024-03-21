@@ -35,3 +35,20 @@ export const updateToconsultant = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+//get a consultant
+export const getconsultant = async (req,res) =>{
+    const userId = req.params.userId;
+
+    try {
+        const consultant = await consultantModel.findById(userId);
+
+        if(consultant)
+        {
+            res.status(200).json(consultant);
+        }
+
+    } catch (error) {
+        res.status(500).json(error)
+    }
+};

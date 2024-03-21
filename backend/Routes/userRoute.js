@@ -1,6 +1,6 @@
 import express from "express";
 import {getEmployer } from '../Controllers/empController.js';
-
+import {getconsultant } from '../Controllers/cosultantController.js';
 
 const  router = express.Router();
 
@@ -28,7 +28,7 @@ router.get('/:userId', getEmployer); //get a Employer
 
 
 //FOR CONSULTANT 
-
+router.get('/:userId', getconsultant); //get a consultant
 
 
 
