@@ -26,7 +26,7 @@ const UserSchema = mongoose.Schema(
         accountType:{
             type: String,
             enum: ['regular','general', 'employer', 'consultant', 'business'],
-            required: true
+            
         }
 
     },{timestamps: true}
