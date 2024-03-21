@@ -1,6 +1,7 @@
 import express from "express";
 import { registerUser,loginUser } from "../Controllers/authController.js";
 import { updateToEmployer } from '../Controllers/empController.js';
+import { updateToBusiness } from '../Controllers/businessController.js';
 
 
 const  router = express.Router();
@@ -23,7 +24,8 @@ router.post('/switchEmployer/:userId', updateToEmployer); //add form data
 
 
 //FOR BUSINESS
-
+router.get('/switchBusiness/:userId', updateToBusiness);
+router.post('/switchBusiness/:userId', updateToBusiness); //add form data
 
 
 //FOR CONSULTANTS
