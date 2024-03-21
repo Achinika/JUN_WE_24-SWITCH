@@ -1,6 +1,8 @@
 import express from "express";
 import { registerUser,loginUser } from "../Controllers/authController.js";
 import { updateToEmployer } from '../Controllers/empController.js';
+import { updateToconsultant } from '../Controllers/cosultantController.js';
+
 
 
 const  router = express.Router();
@@ -28,7 +30,8 @@ router.post('/switchEmployer/:userId', updateToEmployer); //add form data
 
 
 //FOR CONSULTANTS-authentication
-
+router.get('/switchconsultant/:userId', updateToconsultant);
+router.post('/switchconsultant/:userId', updateToconsultant); //add form data
 
 
 
