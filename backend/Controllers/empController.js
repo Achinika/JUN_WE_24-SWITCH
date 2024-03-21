@@ -39,3 +39,20 @@ export const updateToEmployer = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+//get a Employer
+export const getEmployer = async (req,res) =>{
+    const userId = req.params.userId;
+
+    try {
+        const emp = await EmployerModel.findById(userId);
+
+        if(emp)
+        {
+            res.status(200).json(emp);
+        }
+
+    } catch (error) {
+        res.status(500).json(error)
+    }
+};

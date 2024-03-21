@@ -7,26 +7,27 @@ const  router = express.Router();
 
 
 //define routes
-//FOR ALL USERS
+//FOR ALL USERS-authentication
 router.post ('/register', registerUser)
 router.post ('/login', loginUser)
 
-//FOR GENERAL USERS
+
+//FOR GENERAL USERS-authentication
 
 
 
 
-//FOR EMPLOYERS
+//FOR EMPLOYERS-authentication
 router.get('/switchEmployer/:userId', updateToEmployer);
 router.post('/switchEmployer/:userId', updateToEmployer); //add form data
 
 
 
-//FOR BUSINESS
+//FOR BUSINESS-authentication
 
 
 
-//FOR CONSULTANTS
+//FOR CONSULTANTS-authentication
 
 
 
