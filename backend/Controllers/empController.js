@@ -17,14 +17,13 @@ export const updateToEmployer = async (req, res) => {
         }
 
         // Extract employer details from request body
-        const { firstName, lastName,email, location, workingCompany, linkURL, contactNumber, birthDay, description, profilePic, coverPic, followings, followers } = req.body;
+        const { firstName, lastName,location, workingCompany, linkURL, contactNumber, birthDay, description, profilePic, coverPic, followings, followers } = req.body;
 
         // Create a new EmployerModel document associated with the user's ID
         const newEmployer = new EmployerModel({
             user: userId,
             firstName,
             lastName,
-            email,
             location,
             workingCompany,
             linkURL,
