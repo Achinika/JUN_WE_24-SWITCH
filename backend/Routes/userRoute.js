@@ -75,8 +75,8 @@ router.patch('/update/:userId', updateBusinessDetails); //update business
 
 
 //FOR CONSULTANT 
-router.get('/:userId', getconsultant); //get a consultant
-router.patch('/update/:userId', updateconsultantDetails); //update consultant
+router.get('/con/:userId', getconsultant); //get a consultant
+router.patch('/con/update/:userId', updateconsultantDetails); //update consultant
 
 
 
