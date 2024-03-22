@@ -13,6 +13,7 @@ const  router = express.Router();
 router.post ('/register', registerUser)
 router.post ('/login', loginUser)
 
+
 //FOR GENERAL USERS
 
 
@@ -28,8 +29,8 @@ router.post('/switchEmployer/:userId', updateToEmployer); //add form data
 router.get('/switchBusiness/:userId', updateToBusiness);
 router.post('/switchBusiness/:userId', updateToBusiness); //add form data
 
-
 //FOR CONSULTANTS
+
 
 
 

@@ -1,8 +1,6 @@
-
 import express from "express";
 //import {getEmployer } from '../Controllers/empController.js';
 //import {getBusiness } from '../Controllers/businessController.js';
-
 
 const  router = express.Router();
 
