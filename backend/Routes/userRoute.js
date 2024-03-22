@@ -1,7 +1,6 @@
 import express from "express";
-<<<<<<< Updated upstream
 import {getEmployer, updateEmpDetails,deleteEmpAccount} from '../Controllers/empController.js';
-import {getconsultant } from '../Controllers/cosultantController.js';
+import {getconsultant, updateconsultantDetails} from '../Controllers/cosultantController.js';
 import {getGenUser, updateGenDetails} from '../Controllers/generalUserController.js';
 
 import {getEnroll, updateEnrollDetails,postEnroll} from '../Controllers/userEnrollController.js';
@@ -14,10 +13,6 @@ import {getBusiness, updateBusinessDetails} from '../Controllers/businessControl
 
 
 
-=======
-import {getEmployer, updateEmpDetails} from '../Controllers/empController.js';
-import {getconsultant, updateconsultantDetails } from '../Controllers/cosultantController.js';
->>>>>>> Stashed changes
 
 
 
