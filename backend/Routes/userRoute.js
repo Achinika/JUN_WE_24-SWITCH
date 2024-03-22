@@ -1,6 +1,6 @@
 import express from "express";
 import {getEmployer, updateEmpDetails,deleteEmpAccount} from '../Controllers/empController.js';
-import {getconsultant } from '../Controllers/cosultantController.js';
+import {getconsultant, updateconsultantDetails} from '../Controllers/cosultantController.js';
 import {getGenUser, updateGenDetails} from '../Controllers/generalUserController.js';
 
 import {getEnroll, updateEnrollDetails,postEnroll} from '../Controllers/userEnrollController.js';
@@ -43,9 +43,9 @@ router.post('/add/:userId', postEnroll); //update epmloyer
 
 
 //FOR EMPLOYERS
-router.get('/:userId', getEmployer); //get a Employer
-router.patch('/update/:userId', updateEmpDetails); //update epmloyer
-router.delete('/:userId',deleteEmpAccount); //delete employer
+router.get('/emp/:userId', getEmployer); //get a Employer
+router.patch('/update/emp/:userId', updateEmpDetails); //update epmloyer
+router.delete('/emp/:userId',deleteEmpAccount); //delete employer
 
 
 
@@ -75,8 +75,8 @@ router.patch('/update/bus/:userId', updateBusinessDetails); //update business
 
 
 //FOR CONSULTANT 
-router.get('/:userId', getconsultant); //get a consultant
-
+router.get('/con/:userId', getconsultant); //get a consultant
+router.patch('/con/update/:userId', updateconsultantDetails); //update consultant
 
 
 
