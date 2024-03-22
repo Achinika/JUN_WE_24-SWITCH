@@ -29,8 +29,6 @@ mongoose.connect(process.env.MONGO_DB)
 app.use('/auth',AuthRoute); //authentications
 app.use('/user',userRoute); //for  user related operations
 
-
-
 // Define the route for switching to employer account
 app.get('/auth/switchEmployer/:userId', async(req, res) => {
     const userId = req.params.userId;
