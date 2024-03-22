@@ -1,32 +1,39 @@
 import express from "express";
 import { registerUser,loginUser } from "../Controllers/authController.js";
-import { updateToEmployer } from '../Controllers/empController.js';
+//general Users
+import { updateToEmployer } from '../Controllers/empController.js'; //employer
+//business
+import { updateToconsultant } from '../Controllers/cosultantController.js'; //consultant
+
 
 
 const  router = express.Router();
 
 
 //define routes
-//FOR ALL USERS
+//FOR ALL USERS-authentication
 router.post ('/register', registerUser)
 router.post ('/login', loginUser)
 
-//FOR GENERAL USERS
+
+//FOR GENERAL USERS-authentication
 
 
 
-//FOR EMPLOYERS
+
+//FOR EMPLOYERS-authentication
 router.get('/switchEmployer/:userId', updateToEmployer);
 router.post('/switchEmployer/:userId', updateToEmployer); //add form data
 
 
 
-//FOR BUSINESS
+//FOR BUSINESS-authentication
 
 
 
-//FOR CONSULTANTS
-
+//FOR CONSULTANTS-authentication
+router.get('/switchconsultant/:userId', updateToconsultant);
+router.post('/switchconsultant/:userId', updateToconsultant); //add form data
 
 
 

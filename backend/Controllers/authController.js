@@ -1,5 +1,6 @@
 import UserModel from "../Models/userModel.js";
 import bcrypt  from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 //Registering every New User
 export const registerUser = async(req,res) =>{
@@ -18,7 +19,9 @@ try{
     const newUser = new UserModel({
         userName, 
         password: hashedPass,
-        email});
+        email,
+        accountType: 'regular' //set default value for account type
+    });
 
     
    await newUser.save(); // Save the new user to the database
@@ -45,7 +48,12 @@ export const loginUser = async (req, res)=>{
             console.log("Password valid:", isValid); // Debug log
             
             if (isValid) {
-                return res.status(200).json(user);
+                 // Generate JWT token
+                 const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+                 // Return response with token and user data
+                 return res.status(200).json({ token, user });
+
             } else {
                 return res.status(400).json("Wrong Password");
             }
