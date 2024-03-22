@@ -43,9 +43,9 @@ router.post('/add/:userId', postEnroll); //update epmloyer
 
 
 //FOR EMPLOYERS
-router.get('/:userId', getEmployer); //get a Employer
-router.patch('/update/:userId', updateEmpDetails); //update epmloyer
-router.delete('/:userId',deleteEmpAccount); //delete employer
+router.get('/emp/:userId', getEmployer); //get a Employer
+router.patch('/update/emp/:userId', updateEmpDetails); //update epmloyer
+router.delete('/emp/:userId',deleteEmpAccount); //delete employer
 
 
 
