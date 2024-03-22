@@ -46,7 +46,9 @@ export const updateToGenUser = async (req, res) => {
     }
 };
 
+
 //get a General User 
+
 export const getGenUser = async (req,res) =>{
     const userId = req.params.userId;
 
@@ -67,6 +69,8 @@ export const getGenUser = async (req,res) =>{
         res.status(500).json({message: error.message});
     }
 };
+
+
 
 //update a employer Details
 export const updateGenDetails = async (req, res) => {
@@ -119,6 +123,7 @@ export const updateGenDetails = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
 
 
    
