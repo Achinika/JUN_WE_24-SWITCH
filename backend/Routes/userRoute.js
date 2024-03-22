@@ -1,8 +1,14 @@
 import express from "express";
-import {getEmployer, updateEmpDetails} from '../Controllers/empController.js';
+import {getEmployer, updateEmpDetails,deleteEmpAccount} from '../Controllers/empController.js';
 import {getconsultant } from '../Controllers/cosultantController.js';
 
 import {getBusiness, updateBusinessDetails} from '../Controllers/businessController.js'
+
+
+
+
+
+
 
 
 
@@ -24,10 +30,16 @@ const  router = express.Router();
 
 
 
+
+
+
+
+
+
 //FOR EMPLOYERS
 router.get('/:userId', getEmployer); //get a Employer
 router.patch('/update/:userId', updateEmpDetails); //update epmloyer
-
+router.delete('/:userId',deleteEmpAccount); //delete employer
 
 
 
