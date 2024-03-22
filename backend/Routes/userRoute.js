@@ -59,8 +59,8 @@ router.delete('/:userId',deleteEmpAccount); //delete employer
 
 
 //FOR BUSINESS 
-router.get('/:userId', getBusiness); //get a business
-router.patch('/update/:userId', updateBusinessDetails); //update business
+router.get('/bus/:userId', getBusiness); //get a business
+router.patch('/update/bus/:userId', updateBusinessDetails); //update business
 
 
 
