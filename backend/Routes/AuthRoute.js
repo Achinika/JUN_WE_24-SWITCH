@@ -1,6 +1,6 @@
 import express from "express";
 import { registerUser,loginUser } from "../Controllers/authController.js";
-//general Users
+import { updateToGenUser } from '../Controllers/generalUserController.js';//general Users
 import { updateToEmployer } from '../Controllers/empController.js'; //employer
 import { updateToBusiness } from '../Controllers/businessController.js'//business
 import { updateToconsultant } from '../Controllers/cosultantController.js'; //consultant
@@ -17,7 +17,8 @@ router.post ('/login', loginUser)
 
 
 //FOR GENERAL USERS-authentication
-
+router.get('/switchGenUser/:userId', updateToGenUser);
+router.post('/switchGenUser/:userId', updateToGenUser); //add form data
 
 
 
