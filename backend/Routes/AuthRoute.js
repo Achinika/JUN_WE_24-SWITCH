@@ -2,7 +2,7 @@ import express from "express";
 import { registerUser,loginUser } from "../Controllers/authController.js";
 import { updateToGenUser } from '../Controllers/generalUserController.js';//general Users
 import { updateToEmployer } from '../Controllers/empController.js'; //employer
-//business
+import { updateToBusiness } from '../Controllers/businessController.js'//business
 import { updateToconsultant } from '../Controllers/cosultantController.js'; //consultant
 
 
@@ -29,6 +29,8 @@ router.post('/switchEmployer/:userId', updateToEmployer); //add form data
 
 
 //FOR BUSINESS-authentication
+router.get('/switchBusiness/:userId', updateToBusiness);
+router.post('/switchBusiness/:userId', updateToBusiness); //add form data
 
 
 

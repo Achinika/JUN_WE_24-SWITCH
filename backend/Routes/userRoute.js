@@ -8,6 +8,12 @@ import {getEnroll, updateEnrollDetails,postEnroll} from '../Controllers/userEnro
 
 
 
+import {getBusiness, updateBusinessDetails} from '../Controllers/businessController.js'
+
+
+
+
+
 const  router = express.Router();
 
 //FOR GENERAL USERS
@@ -41,7 +47,8 @@ router.patch('/update/:userId', updateEmpDetails); //update epmloyer
 
 
 //FOR BUSINESS 
-
+router.get('/:userId', getBusiness); //get a business
+router.patch('/update/:userId', updateBusinessDetails); //update business
 
 
 
