@@ -19,7 +19,7 @@ export const updateToBusiness = async (req, res) => {
         const { businessName, location, industry, website, profilepicture, coverpicture, followers, following} = req.body;
 
         // Create a new EmployerModel document associated with the user's ID
-        const newEmployer = new BusinessModel({
+        const newBusiness = new BusinessModel({
             user: userId,
             businessName,
             location,
