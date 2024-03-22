@@ -1,5 +1,5 @@
 import express from "express";
-import {getEmployer } from '../Controllers/empController.js';
+import {getEmployer, updateEmpDetails} from '../Controllers/empController.js';
 import {getconsultant } from '../Controllers/cosultantController.js';
 
 const  router = express.Router();
@@ -13,6 +13,7 @@ const  router = express.Router();
 
 //FOR EMPLOYERS
 router.get('/:userId', getEmployer); //get a Employer
+router.patch('/update/:userId', updateEmpDetails); //update epmloyer
 
 
 
