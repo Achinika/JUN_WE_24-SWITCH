@@ -120,6 +120,39 @@ export const updateEmpDetails = async (req, res) => {
     }
 };
 
+//delete Employer account from both db
+export const deleteEmpAccount =async(req,res) => {
+    const userId = req.params.userId;
+
+    try {
+        // Extract the token from the request headers
+        const token = req.headers.authorization.split(' ')[1];
+
+        // Verify the token to obtain user data, including the user ID
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+
+        // Extract the user ID from the decoded token
+        const loggedInUserId = decodedToken.userId;
+
+        // Check if the user ID in the request matches the logged-in user ID
+        if (userId !== loggedInUserId) {
+            return res.status(403).json({ message: "You are not authorized to Delete this Account" });
+        }
+
+        // Find and delete the employer document
+        await EmployerModel.findOneAndDelete({ user: userId });
+
+        // Find and delete the user document
+        await UserModel.findByIdAndDelete(userId);
+
+        // Return success response
+        res.status(200).json({ message: "User account deleted successfully" });
+
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
 
    
 
