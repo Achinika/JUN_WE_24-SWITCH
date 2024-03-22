@@ -4,8 +4,15 @@ import {getconsultant } from '../Controllers/cosultantController.js';
 
 const  router = express.Router();
 
-
 //FOR GENERAL USERS
+
+
+
+
+
+
+
+
 
 
 
@@ -20,7 +27,20 @@ router.patch('/update/:userId', updateEmpDetails); //update epmloyer
 
 
 
+
+
+
+
+
+
+
 //FOR BUSINESS 
+
+
+
+
+
+
 
 
 
@@ -30,6 +50,16 @@ router.patch('/update/:userId', updateEmpDetails); //update epmloyer
 
 //FOR CONSULTANT 
 router.get('/:userId', getconsultant); //get a consultant
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,7 +1,9 @@
 import express from "express";
 import { registerUser,loginUser } from "../Controllers/authController.js";
-import { updateToEmployer } from '../Controllers/empController.js';
-import { updateToconsultant } from '../Controllers/cosultantController.js';
+//general Users
+import { updateToEmployer } from '../Controllers/empController.js'; //employer
+//business
+import { updateToconsultant } from '../Controllers/cosultantController.js'; //consultant
 
 
 
