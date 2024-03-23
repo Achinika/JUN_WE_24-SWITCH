@@ -1,20 +1,27 @@
 import express from "express";
-import {getEmployer, updateEmpDetails} from '../Controllers/empController.js';
-import {getconsultant } from '../Controllers/cosultantController.js';
-import {getGenUser, updateGenDetails} from '../Controllers/generalUserController.js';
+import {getEmployer, updateEmpDetails,deleteEmpAccount} from '../Controllers/empController.js';
+import {getconsultant, updateconsultantDetails,deleteconsultantAccount} from '../Controllers/cosultantController.js';
+import {getGenUser, updateGenDetails, deleteGenAccount} from '../Controllers/generalUserController.js';
 
 import {getEnroll, updateEnrollDetails, postEnroll, deleteEnroll} from '../Controllers/userEnrollController.js';
 
-import {getRidesharing, updateRidesharingDetails, postRidesharing} from '../Controllers/rideSharingController.js';
+import {getRidesharing, updateRidesharingDetails, postRidesharing, deleteRideAccount} from '../Controllers/rideSharingController.js';
 
 
-import {getBusiness, updateBusinessDetails} from '../Controllers/businessController.js'
+import {getBusiness, updateBusinessDetails, deleteBusinessAccount} from '../Controllers/businessController.js'
 
 
 
+
+
+
+
+
+//import{followUser} from '../Controllers/allUsersController.js';
 
 
 const  router = express.Router();
+//router.put('/:id/followUser',followUser ); //follow a user-common for all user account types
 
 
 
@@ -26,7 +33,7 @@ const  router = express.Router();
 //FOR GENERAL USERS
 router.get('/:userId', getGenUser); //get a Employer
 router.patch('/update/:userId', updateGenDetails); //update epmloyer
-
+router.post('/delete/:userId', deleteGenAccount); //delet RIDESHARING
 // FOR ENROLL USER
 router.get('/:userId', getEnroll); //get a Employer
 router.patch('/update/:userId', updateEnrollDetails); //update epmloyer
@@ -35,14 +42,21 @@ router.post('/delete/:userId', deleteEnroll); //delet epmloyer
 
 // FOR RIDESHARING USER
 router.get('/:userId', getRidesharing); //get a RIDESHARING
-router.patch('/update/:userId', updateRidesharingDetails); //update RIDESHARING
+router.patch('/update/ride/:userId', updateRidesharingDetails); //update RIDESHARING
 router.post('/add/ride/:userId', postRidesharing); //update RIDESHARING
+router.post('/delete/ride/:userId', deleteRideAccount); //delet RIDESHARING
+
+
+
+
+
+
 
 
 //FOR EMPLOYERS
-router.get('/:userId', getEmployer); //get a Employer
-router.patch('/update/:userId', updateEmpDetails); //update epmloyer
-
+router.get('/emp/:userId', getEmployer); //get a Employer
+router.patch('/update/emp/:userId', updateEmpDetails); //update epmloyer
+router.delete('/emp/:userId',deleteEmpAccount); //delete employer
 
 
 
@@ -56,9 +70,9 @@ router.patch('/update/:userId', updateEmpDetails); //update epmloyer
 
 
 //FOR BUSINESS 
-router.get('/:userId', getBusiness); //get a business
-router.patch('/update/:userId', updateBusinessDetails); //update business
-
+router.get('/bus/:userId', getBusiness); //get a business
+router.patch('/update/bus/:userId', updateBusinessDetails); //update business
+router.delete('/emp/:userId',deleteBusinessAccount); //delete business
 
 
 
@@ -72,10 +86,9 @@ router.patch('/update/:userId', updateBusinessDetails); //update business
 
 
 //FOR CONSULTANT 
-router.get('/:userId', getconsultant); //get a consultant
-
-
-
+router.get('/con/:userId', getconsultant); //get a consultant
+router.patch('/con/update/:userId', updateconsultantDetails); //update consultant
+router.delete('/con/:userId',deleteconsultantAccount); //delete consultant
 
 
 
