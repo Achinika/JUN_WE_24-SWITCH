@@ -18,7 +18,7 @@ export const updateToEmployer = async (req, res) => {
         }
 
         // Extract employer details from request body
-        const { firstName, lastName,location, workingCompany, linkURL, contactNumber, birthDay, description, profilePic, coverPic } = req.body;
+        const { firstName, lastName,location, workingCompany, linkURL, contactNumber, birthDay, description, profilePic, coverPic, followings, followers } = req.body;
 
         // Create a new EmployerModel document associated with the user's ID
         const newEmployer = new EmployerModel({
@@ -32,7 +32,9 @@ export const updateToEmployer = async (req, res) => {
             birthDay,
             description,
             profilePic,
-            coverPic
+            coverPic,
+            followings,
+            followers
 
         });
 
@@ -51,7 +53,7 @@ export const getEmployer = async (req,res) =>{
 
     try {
         //include the email field and userId  from the related UserModel
-        const emp = await EmployerModel.findOne({ user: userId }).populate('user', 'email','followings',  'followers'); //in the response
+        const emp = await EmployerModel.findOne({ user: userId }).populate('user', 'email');
         if(emp)
         {
             //remove the pw from the response

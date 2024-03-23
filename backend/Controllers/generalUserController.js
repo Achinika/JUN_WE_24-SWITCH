@@ -3,7 +3,7 @@ import UserModel from "../Models/userModel.js";
 import jwt from 'jsonwebtoken';
 
 
-// Update user account to become an employer
+// Update user account to become an GenUser 
 export const updateToGenUser = async (req, res) => {
     const userId = req.params.userId; // Assuming you pass the user ID as a parameter
 
@@ -16,10 +16,10 @@ export const updateToGenUser = async (req, res) => {
             return res.status(404).json({ message: "User not found" });
         }
 
-        // Extract employer details from request body
+        // Extract GenUser  details from request body
         const { firstName, lastName,location, workingCompany, linkURL, contactNumber, birthDay, description, profilePic, coverPic, followings, followers } = req.body;
 
-        // Create a new EmployerModel document associated with the user's ID
+        // Create a new GeneralUserModel document associated with the user's ID
         const newGenUser = new GeneralUserModel({
             user: userId,
             firstName,
@@ -37,7 +37,7 @@ export const updateToGenUser = async (req, res) => {
 
         });
 
-        // Save the new employer details
+        // Save the new GenUser  details
         const savedGenUser = await newGenUser.save();
 
         res.status(200).json(savedGenUser);
@@ -70,9 +70,7 @@ export const getGenUser = async (req,res) =>{
     }
 };
 
-
-
-//update a employer Details
+//update a GenUser  Details
 export const updateGenDetails = async (req, res) => {
     const userId = req.params.userId;
 
@@ -91,15 +89,15 @@ export const updateGenDetails = async (req, res) => {
             return res.status(403).json({ message: "You are not authorized to perform this action" });
         }
 
-        // Retrieve the existing employer document
+        // Retrieve the existing GenUser  document
         let genUser = await GeneralUserModel.findOne({ user: userId });
 
-        // Check if employer exists
+        // Check if GenUser  exists
         if (!genUser) {
             return res.status(404).json({ message: "GenUser not found" });
         }
 
-        // Update employer details with the new data from the request body
+        // Update GenUser  details with the new data from the request body
         const { firstName, lastName, email, location, workingCompany, linkURL, contactNumber, birthDay, description, profilePic, coverPic } = req.body;
 
         genUser.firstName = firstName;
@@ -114,17 +112,48 @@ export const updateGenDetails = async (req, res) => {
         genUser.profilePic = profilePic;
         genUser.coverPic = coverPic;
 
-        // Save the updated employer document
+        // Save the updated GenUser  document
         genUser = await genUser.save();
 
-        // Return the updated employer data as a response
+        // Return the updated GenUser  data as a response
         res.status(200).json(genUser);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
 
+//delete GenUser account from both db
+export const deleteGenAccount =async(req,res) => {
+    const userId = req.params.userId;
 
+    try {
+        // Extract the token from the request headers
+        const token = req.headers.authorization.split(' ')[1];
+
+        // Verify the token to obtain user data, including the user ID
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+
+        // Extract the user ID from the decoded token
+        const UserId = decodedToken.userId;
+
+        // Check if the user ID in the request matches the logged-in user ID
+        if (userId !== UserId) {
+            return res.status(403).json({ message: "You are not authorized to Delete this Account" });
+        }
+
+        // Find and delete the GenUser document
+        await GeneralUserModel.findOneAndDelete({ user: userId });
+
+        // Find and delete the user document
+        await UserModel.findByIdAndDelete(userId);
+
+        // Return success response
+        res.status(200).json({ message: "GenUser account deleted successfully" });
+
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
 
    
 
