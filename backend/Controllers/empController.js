@@ -52,7 +52,7 @@ export const getEmployer = async (req,res) =>{
 
     try {
         //include the email field and userId  from the related UserModel
-        const emp = await EmployerModel.findOne({ user: userId }).populate('user', 'email');
+        const emp = await EmployerModel.findOne({ user: userId }).populate('user', 'email','followings',  'followers'); //in the response
         if(emp)
         {
             //remove the pw from the response
