@@ -1,5 +1,6 @@
 import EmployerModel from "../Models/employerModel.js";
 import UserModel from "../Models/userModel.js";
+import JobModel from "../Models/jobsModel.js";
 import jwt from 'jsonwebtoken';
 
 
@@ -152,6 +153,104 @@ export const deleteEmpAccount =async(req,res) => {
         res.status(500).json({ message: error.message });
     }
 }
+
+
+// Add a job advertisement
+export const addJobAdvt = async (req, res) => {
+    const userId = req.params.userId;
+
+    try {
+        // Retrieve the existing employer document
+        const employer = await EmployerModel.findOne({ user: userId });
+
+        // Check if employer exists
+        if (!employer) {
+            return res.status(404).json({ message: "Employer not found" });
+        }
+
+        // Extract job details from request body
+        const { jobTitle, jobDescription, postedDate, closingDate, experienceLevel, company, location, jobType, contactNumber, contactEmail } = req.body;
+
+        // Create a new Job model instance
+        const newJob = new JobModel({
+            employer: employer._id,
+            jobTitle,
+            jobDescription,
+            postedDate,
+            closingDate,
+            experienceLevel,
+            company,
+            location,
+            jobType,
+            contactNumber,
+            contactEmail
+        });
+
+        // Save the new job advertisement
+        const savedJob = await newJob.save();
+
+        res.status(200).json(savedJob);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+//edit job advertisement
+export const updateJobAdvt = async (req, res) => {
+    const jobId = req.params.jobId; // Assuming you pass the job ID as a parameter
+
+    try {
+        // Find the job advertisement by ID
+        const job = await JobModel.findById(jobId);
+
+        // Check if job advertisement exists
+        if (!job) {
+            return res.status(404).json({ message: "Job advertisement not found" });
+        }
+
+        // Extract updated job details from request body
+        const { jobTitle, jobDescription, postedDate, closingDate, experienceLevel, company, location, jobType, contactNumber, contactEmail } = req.body;
+
+        // Update job advertisement fields with new values
+        job.jobTitle = jobTitle;
+        job.jobDescription = jobDescription;
+        job.postedDate = postedDate;
+        job.closingDate = closingDate;
+        job.experienceLevel = experienceLevel;
+        job.company = company;
+        job.location = location;
+        job.jobType = jobType;
+        job.contactNumber = contactNumber;
+        job.contactEmail = contactEmail;
+
+        // Save the updated job advertisement
+        const updatedJob = await job.save();
+
+        res.status(200).json(updatedJob);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+// Delete a job advertisement
+export const deleteJobAdvt = async (req, res) => {
+    const jobId = req.params.jobId; // Assuming you pass the job ID as a parameter
+
+    try {
+        // Find the job advertisement by ID and delete it
+        const deletedJob = await JobModel.findByIdAndDelete(jobId);
+
+        // Check if job advertisement exists
+        if (!deletedJob) {
+            return res.status(404).json({ message: "Job advertisement not found" });
+        }
+
+        res.status(200).json({ message: "Job advertisement deleted successfully !" });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 
 
    
