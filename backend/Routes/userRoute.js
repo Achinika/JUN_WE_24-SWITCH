@@ -1,6 +1,6 @@
 import express from "express";
 import {getEmployer, updateEmpDetails,deleteEmpAccount} from '../Controllers/empController.js';
-import {getconsultant} from '../Controllers/cosultantController.js';
+import {getconsultant, updateconsultantDetails,deleteconsultantAccount} from '../Controllers/cosultantController.js';
 import {getGenUser, updateGenDetails, deleteGenAccount} from '../Controllers/generalUserController.js';
 
 import {getEnroll, updateEnrollDetails, postEnroll, deleteEnroll} from '../Controllers/userEnrollController.js';
@@ -9,7 +9,7 @@ import {getRidesharing, updateRidesharingDetails, postRidesharing, deleteRideAcc
 
 
 import {getBusiness, updateBusinessDetails, deleteBusinessAccount} from '../Controllers/businessController.js'
-
+import { addproduct } from '../Controllers/businessController.js'
 
 
 
@@ -73,7 +73,7 @@ router.delete('/emp/deleteJob/:jobId', deleteJobAdvt); //delete job post for emp
 router.get('/bus/:userId', getBusiness); //get a business
 router.patch('/update/bus/:userId', updateBusinessDetails); //update business
 router.delete('/bus/:userId',deleteBusinessAccount); //delete business
-
+router.post('./bus/addproduct/:userId', addproduct); // add new product
 
 
 
@@ -87,7 +87,8 @@ router.delete('/bus/:userId',deleteBusinessAccount); //delete business
 
 //FOR CONSULTANT 
 router.get('/con/:userId', getconsultant); //get a consultant
-
+router.patch('/con/update/:userId', updateconsultantDetails); //update consultant
+router.delete('/con/:userId',deleteconsultantAccount); //delete consultant
 
 
 

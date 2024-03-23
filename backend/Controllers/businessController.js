@@ -144,3 +144,37 @@ export const deleteBusinessAccount =async(req,res) => {
         res.status(500).json({ message: error.message });
     }
 }
+
+//add new product part
+export const addproduct = async (req,res) =>{
+    const userId = req.params.userId;
+
+    try {
+        // Retrieve the existing business document
+        const business = await businessModel.findOne({ user: userId });
+
+        // Check if business exists
+        if (!business) {
+            return res.status(404).json({ message: "business not found" });
+        }
+
+        // Extract product details from request body
+        const { title, description, location, salary } = req.body;
+
+        // Create a new product model instance
+        const newProduct = new addProductModel({
+            business: business._id,
+            title,
+            description,
+            location,
+            salary
+        });
+
+        // Save the new product advertisement
+        const savedProduct = await newProduct.save();
+
+        res.status(200).json(savedProduct);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
