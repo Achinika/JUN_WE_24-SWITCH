@@ -1,9 +1,9 @@
 import UserEnrollModel from "../Models/userEnrollModel.js";
-import UserModel from "../Models/userModel.js";
+/*import UserModel from "../Models/userModel.js";*/
 import jwt from 'jsonwebtoken';
 
 
-// Update user account to become an employer
+// Update user account to become an Enroll
 export const updateToGenUser = async (req, res) => {
     const userId = req.params.userId; // Assuming you pass the user ID as a parameter
 
@@ -13,13 +13,11 @@ export const updateToGenUser = async (req, res) => {
 
         // Check if user exists
         if (!user) {
-            return res.status(404).json({ message: "User not found" });
+            return res.status(404).json({ message: "Enroll not found" });
         }
 
-        // Extract employer details from request body
-        const { studentName, birthDate,gender, address, city, province, postalcode, email, mobileNumberl, courses, additionalcomment} = req.body;
+        const {studentName, birthDate,gender, address, city, province, postalcode, email, mobileNumberl, courses, additionalcomment} = req.body;
 
-        // Create a new EmployerModel document associated with the user's ID
         const newEnroll = new UserEnrollModel({
             user: userId,
             studentName,
@@ -36,7 +34,7 @@ export const updateToGenUser = async (req, res) => {
 
         });
 
-        // Save the new enroll details
+        // Save the new Enroll details
         const savedEnroll = await newEnroll.save();
 
         res.status(200).json(savedEnroll);
@@ -68,24 +66,43 @@ export const postEnroll = async (req,res) =>{
 
         });
 
-    // Respond with a success message and the created enrollment
-    res.status(201).json({ message: 'Enrollment created successfully', enroll: newEnroll });
-  } catch (error) {
-    // Handle any errors that occurred during enrollment
-    console.error('Error enrolling in courses:', error);
-    res.status(500).json({ message: 'An error occurred while enrolling in courses' });
-  }
+       // Save the new enrollment to the database
+       await newEnroll.save();
+
+       // Fetch user details from MongoDB
+       const user = await UserModel.findById(userId);
+
+       if (!user) {
+           return res.status(404).json({ message: 'User not found' });
+       }
+
+       // Customize the response data with user details
+       const responseData = {
+           message: 'Enrollment created successfully',
+           enroll: newEnroll,
+           user: {
+               _id: user._id,
+               
+               // Include other relevant user details here
+           }
+       };
+
+       // Respond with the customized data
+       res.status(201).json(responseData);
+   } catch (error) {
+       // Handle any errors that occurred during enrollment
+       console.error('Error enrolling in courses:', error);
+       res.status(500).json({ message: 'An error occurred while enrolling in courses' });
+   }
 };
 
 
-
-
-//get a Enroll   
+//get Enroll   
 export const getEnroll = async (req,res) =>{
     const userId = req.params.userId;
 
     try {
-        //include the email field and userId  from the related UserModel
+        //include the email field and userId  from the related EnrollModel
         const emp = await UserEnrollModel.findOne({ user: userId }).populate('user', 'email');
         if(emp)
         {
@@ -154,6 +171,29 @@ export const updateEnrollDetails = async (req, res) => {
     }
 };
 
+
+// DELETE an enrollment
+export const deleteEnroll = async (req, res) => {
+    const userId = req.params.userId;
+
+    try {
+        // Check if the enrollment exists
+        const enroll = await userId.findById(enroll);
+        if (!enroll) {
+            return res.status(404).json({ message: 'Enrollment not found' });
+        }
+
+        // Delete the enrollment from the database
+        await enroll.remove();
+
+        // Respond with success message and deleted enrollment data
+        res.status(200).json({ message: 'Enrollment deleted successfully', deleteEnroll: enroll });
+    } catch (error) {
+        // Handle any errors that occurred during deletion
+        console.error('Error deleting enrollment:', error);
+        res.status(500).json({ message: 'An error occurred while deleting enrollment' });
+    }
+};
 
    
 
