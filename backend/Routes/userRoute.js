@@ -22,6 +22,7 @@ import {getBusiness, updateBusinessDetails, deleteBusinessAccount} from '../Cont
 
 const  router = express.Router();
 
+
 //FOR GENERAL USERS
 router.get('/:userId', getGenUser); //get a Employer
 router.patch('/update/:userId', updateGenDetails); //update epmloyer
