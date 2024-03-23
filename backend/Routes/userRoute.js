@@ -33,18 +33,18 @@ const  router = express.Router();
 //FOR GENERAL USERS
 router.get('/:userId', getGenUser); //get a Employer
 router.patch('/update/:userId', updateGenDetails); //update epmloyer
-router.post('/delete/:userId', deleteGenAccount); //delet RIDESHARING
+router.delete('/delete/:userId', deleteGenAccount); //delet RIDESHARING
 // FOR ENROLL USER
-router.get('/:userId', getEnroll); //get a Employer
-router.patch('/update/:userId', updateEnrollDetails); //update epmloyer
-router.post('/add/:userId', postEnroll); //add epmloyer
-router.post('/delete/:userId', deleteEnroll); //delet epmloyer
+router.get('/enroll/:userId', getEnroll); //get a Employer
+router.patch('/update/enroll/:userId', updateEnrollDetails); //update epmloyer
+router.post('/add/enroll/:userId', postEnroll); //add epmloyer
+router.delete('/delete/enroll/:userId', deleteEnroll); //delet epmloyer
 
 // FOR RIDESHARING USER
-router.get('/:userId', getRidesharing); //get a RIDESHARING
+router.get('/ride/:userId', getRidesharing); //get a RIDESHARING
 router.patch('/update/ride/:userId', updateRidesharingDetails); //update RIDESHARING
 router.post('/add/ride/:userId', postRidesharing); //update RIDESHARING
-router.post('/delete/ride/:userId', deleteRideAccount); //delet RIDESHARING
+router.delete('/delete/ride/:userId', deleteRideAccount); //delet RIDESHARING
 
 
 
