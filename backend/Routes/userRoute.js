@@ -17,11 +17,11 @@ import {getBusiness, updateBusinessDetails, deleteBusinessAccount} from '../Cont
 
 
 
-
+//import{followUser} from '../Controllers/allUsersController.js';
 
 
 const  router = express.Router();
-
+//router.put('/:id/followUser',followUser ); //follow a user-common for all user account types
 
 //FOR GENERAL USERS
 router.get('/:userId', getGenUser); //get a Employer
