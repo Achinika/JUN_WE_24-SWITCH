@@ -1,5 +1,5 @@
 import UserEnrollModel from "../Models/userEnrollModel.js";
-/*import UserModel from "../Models/userModel.js";*/
+import UserModel from "../Models/userModel.js";
 import jwt from 'jsonwebtoken';
 
 
@@ -172,28 +172,36 @@ export const updateEnrollDetails = async (req, res) => {
 };
 
 
-// DELETE an enrollment
-export const deleteEnroll = async (req, res) => {
+//delete enrollment account from both db
+export const deleteEnroll =async(req,res) => {
     const userId = req.params.userId;
 
     try {
-        // Check if the enrollment exists
-        const enroll = await userId.findById(enroll);
-        if (!enroll) {
-            return res.status(404).json({ message: 'Enrollment not found' });
+        // Extract the token from the request headers
+        const token = req.headers.authorization.split(' ')[1];
+
+        // Verify the token to obtain user data, including the user ID
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+
+        // Extract the user ID from the decoded token
+        const loggedInUserId = decodedToken.userId;
+
+        // Check if the user ID in the request matches the logged-in user ID
+        if (userId !== loggedInUserId) {
+            return res.status(403).json({ message: "You are not authorized to Delete this Account" });
         }
 
-        // Delete the enrollment from the database
-        await enroll.remove();
+        // Find and delete the enrollment document
+        await UserEnrollModel.findOneAndDelete({ user: userId });
 
-        // Respond with success message and deleted enrollment data
-        res.status(200).json({ message: 'Enrollment deleted successfully', deleteEnroll: enroll });
+        // Find and delete the user document
+        await UserModel.findByIdAndDelete(userId);
+
+        // Return success response
+        res.status(200).json({ message: "GenUser account deleted successfully" });
+
     } catch (error) {
-        // Handle any errors that occurred during deletion
-        console.error('Error deleting enrollment:', error);
-        res.status(500).json({ message: 'An error occurred while deleting enrollment' });
+        res.status(500).json({ message: error.message });
     }
-};
-
-   
+}   
 
