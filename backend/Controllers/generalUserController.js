@@ -120,7 +120,7 @@ export const updateGenDetails = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
-};back
+};
 
 //delete GenUser account from both db
 export const deleteGenAccount =async(req,res) => {
