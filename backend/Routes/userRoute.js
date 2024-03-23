@@ -14,7 +14,7 @@ import {getBusiness, updateBusinessDetails, deleteBusinessAccount} from '../Cont
 
 
 
-
+import { addJobAdvt,updateJobAdvt,deleteJobAdvt  } from "../Controllers/empController.js";
 
 
 //import{followUser} from '../Controllers/allUsersController.js';
@@ -47,9 +47,9 @@ router.post('/add/:userId', postEnroll); //update epmloyer
 router.get('/emp/:userId', getEmployer); //get a Employer
 router.patch('/update/emp/:userId', updateEmpDetails); //update epmloyer
 router.delete('/emp/:userId',deleteEmpAccount); //delete employer
-
-
-
+router.post('/emp/addjob/:userId',addJobAdvt ); //add job post for employer
+router.patch('/emp/editJob/:jobId', updateJobAdvt); //edit job post for employers
+router.delete('/emp/deleteJob/:jobId', deleteJobAdvt); //delete job post for employers
 
 
 
