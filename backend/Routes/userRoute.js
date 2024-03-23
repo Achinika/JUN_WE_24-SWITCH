@@ -1,6 +1,6 @@
 import express from "express";
 import {getEmployer, updateEmpDetails,deleteEmpAccount} from '../Controllers/empController.js';
-import {getconsultant, updateconsultantDetails} from '../Controllers/cosultantController.js';
+import {getconsultant, updateconsultantDetails,deleteconsultantAccount} from '../Controllers/cosultantController.js';
 import {getGenUser, updateGenDetails} from '../Controllers/generalUserController.js';
 
 import {getEnroll, updateEnrollDetails,postEnroll} from '../Controllers/userEnrollController.js';
@@ -77,8 +77,7 @@ router.delete('/emp/:userId',deleteBusinessAccount); //delete business
 //FOR CONSULTANT 
 router.get('/con/:userId', getconsultant); //get a consultant
 router.patch('/con/update/:userId', updateconsultantDetails); //update consultant
-
-
+router.delete('/con/:userId',deleteconsultantAccount); //delete consultant
 
 
 
