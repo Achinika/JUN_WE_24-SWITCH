@@ -27,7 +27,9 @@ const UserSchema = mongoose.Schema(
             type: String,
             enum: ['regular','general', 'employer', 'consultant', 'business'],
             
-        }
+        },
+        followings: [],
+        followers: []
 
     },{timestamps: true}
 );
