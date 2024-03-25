@@ -9,7 +9,7 @@ import {getRidesharing, updateRidesharingDetails, postRidesharing, deleteRideAcc
 
 
 import {getBusiness, updateBusinessDetails, deleteBusinessAccount} from '../Controllers/businessController.js'
-import { addproduct } from '../Controllers/businessController.js'
+import { addproduct, updateProduct, deleteProduct } from '../Controllers/businessController.js'
 
 
 
@@ -74,6 +74,8 @@ router.get('/bus/:userId', getBusiness); //get a business
 router.patch('/update/bus/:userId', updateBusinessDetails); //update business
 router.delete('/bus/:userId',deleteBusinessAccount); //delete business
 router.post('./bus/addproduct/:userId', addproduct); // add new product
+router.patch('./bus/updateProduct/:productId', updateProduct); //update product details
+router.delete('./bus/deleteProduct/:productId', deleteProduct); //delete product
 
 
 
