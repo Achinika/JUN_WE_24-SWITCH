@@ -19,6 +19,6 @@ const addProductSchema = mongoose.Schema(
 
 
 
-const addProductModel = mongoose.model('business', addProductSchema);
+const addProductModel = mongoose.model('addProduct', addProductSchema);
 
 export default addProductModel;
