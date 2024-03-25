@@ -1,3 +1,4 @@
+import addProductModel from "../Models/addproductModel.js";
 import BusinessModel from "../Models/businessModel.js";
 import UserModel from "../Models/userModel.js";
 import jwt from 'jsonwebtoken';
@@ -145,7 +146,8 @@ export const deleteBusinessAccount =async(req,res) => {
     }
 }
 
-//add new product part
+//////////////add new product part//////////////////////////////////////////////////
+
 export const addproduct = async (req,res) =>{
     const userId = req.params.userId;
 
@@ -159,15 +161,17 @@ export const addproduct = async (req,res) =>{
         }
 
         // Extract product details from request body
-        const { title, description, location, salary } = req.body;
+        const { title, description, catagory } = req.body;
 
         // Create a new product model instance
         const newProduct = new addProductModel({
             business: business._id,
             title,
-            description,
-            location,
-            salary
+            catagory,
+            descr,
+            image,
+            likes
+            
         });
 
         // Save the new product advertisement
@@ -177,4 +181,57 @@ export const addproduct = async (req,res) =>{
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
-}
+};
+
+//edit product details
+export const updateProduct = async (req, res) => {
+    const productId = req.params.productId; // Assuming you pass the product ID as a parameter
+
+    try {
+        // Find the product advertisement by ID
+        const product = await addProductModel.findById(productId);
+
+        // Check if product advertisement exists
+        if (!product) {
+            return res.status(404).json({ message: "Product not found" });
+        }
+
+        // Extract updated product details from request body
+        const { title, catagory, descr, image, likes } = req.body;
+
+        // Update product advertisement fields with new values
+        product.title = title;
+        product.catagory = catagory;
+        product.descr = descr;
+        product.image = image;
+        product.likes = likes;
+
+        
+
+        // Save the updated product advertisement
+        const updatedProduct = await product.save();
+
+        res.status(200).json(updatedProduct);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+// Delete a product advertisement
+export const deleteProduct = async (req, res) => {
+    const productId = req.params.ProductId; // Assuming you pass the product ID as a parameter
+
+    try {
+        // Find the product advertisement by ID and delete it
+        const deletedProduct = await addProductModel.findByIdAndDelete(productId);
+
+        // Check if Product advertisement exists
+        if (!deletedProduct) {
+            return res.status(404).json({ message: "Product not found" });
+        }
+
+        res.status(200).json({ message: "Product deleted successfully !" });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
