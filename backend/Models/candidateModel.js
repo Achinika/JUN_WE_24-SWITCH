@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+/*import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
@@ -45,4 +45,4 @@ const candiApplicationSchema = new Schema({
 
 const CandidatesApplications = mongoose.model('CandidatesApplications', candiApplicationSchema);
 
-export default CandidatesApplications;
+export default CandidatesApplications;*/
