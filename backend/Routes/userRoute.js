@@ -15,13 +15,13 @@ import { addproduct } from '../Controllers/businessController.js'
 
 
 import { addJobAdvt,updateJobAdvt,deleteJobAdvt  } from "../Controllers/empController.js";
+//import{applyForJob} from "../Controllers/candidateController.js";
 
-
-//import{followUser} from '../Controllers/allUsersController.js';
+import{followUser} from '../Controllers/allUsersController.js';
 
 
 const  router = express.Router();
-//router.put('/:id/followUser',followUser ); //follow a user-common for all user account types
+router.put('/:id/followUser',followUser ); //follow a user-common for all user account types
 
 
 
@@ -60,8 +60,8 @@ router.delete('/emp/:userId',deleteEmpAccount); //delete employer
 router.post('/emp/addjob/:userId',addJobAdvt ); //add job post for employer
 router.patch('/emp/editJob/:jobId', updateJobAdvt); //edit job post for employers
 router.delete('/emp/deleteJob/:jobId', deleteJobAdvt); //delete job post for employers
-
-
+//candidates
+//router.post('/apply/:jobId',applyForJob ); //add job post for employer
 
 
 
