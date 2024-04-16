@@ -1,40 +1,52 @@
 import mongoose from "mongoose";
 
-const GenSchema = mongoose.Schema(
+const EnrollSchema = mongoose.Schema(
     {
         user: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Users', // Reference to the UserModel
             required: true
         },
-        firstName: {
+        studentName: {
             type: String,
             required: true
         },
-        lastName: {
+        birthDate: {
             type: String,
             required: true
         },
-        location: {
+        gender: {
             type: String,
             required: true
         },
-        workingCompany: {
+        address: {
             type: String,
             required: true
         },
-        linkURL: {
+        city: {
             type: String,
         },
-        contactNumber: {
+        province: {
             type: String,
             required: true
         },
-        birthDay: {
-            type: Date,
+        postalcode: {
+            type: String,
             required: true
         },
-        description: {
+        email: {
+            type: String,
+            required: true
+        },
+        mobileNumberl: {
+            type: String,
+            required: true
+        },
+        courses: {
+            type: String,
+            required: true
+        },
+        additionalcomment: {
             type: String,
             required: true
         }
@@ -42,6 +54,6 @@ const GenSchema = mongoose.Schema(
     { timestamps: true }
 );
 
-const GeneralUserModel = mongoose.model('genUsers', GenSchema);
+const UserEnrollModel = mongoose.model('enrollUsers', EnrollSchema);
 
-export default GeneralUserModel;
+export default UserEnrollModel;

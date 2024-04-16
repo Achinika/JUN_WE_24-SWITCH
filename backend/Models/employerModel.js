@@ -25,6 +25,13 @@ const EmpSchema = mongoose.Schema(
         },
         linkURL: {
             type: String,
+            /*alidate: {
+                validator: function (v) {
+                    // Check if the URL is valid (basic validation)
+                    return /^(ftp|http|https):\/\/[^ "]+$/.test(v);
+                },
+                message: props => `${props.value} is not a valid URL!`
+            }*/
         },
         contactNumber: {
             type: String,
@@ -32,7 +39,14 @@ const EmpSchema = mongoose.Schema(
         },
         birthDay: {
             type: Date,
-            required: true
+            required: true,
+            validate: {
+                validator: function (v) {
+                    // Check if the date is not in the future
+                    return v <= new Date();
+                },
+                message: props => `${props.value} cannot be a future date!`
+            }
         },
         description: {
             type: String,
@@ -40,8 +54,7 @@ const EmpSchema = mongoose.Schema(
         },
         profilePic: String,
         coverPic:  String,
-        followings: [],
-        followers: []
+        
     },
     { timestamps: true }
 );

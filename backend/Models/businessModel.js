@@ -24,9 +24,7 @@ const businessSchema = mongoose.Schema(
         },
 
         profilepicture: String,
-        coverpicture: String,
-        followers: [],
-        following: []
+        coverpicture: String
 
     },{timestamps: true}
 );

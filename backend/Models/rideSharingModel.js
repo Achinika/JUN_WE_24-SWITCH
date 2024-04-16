@@ -1,40 +1,30 @@
 import mongoose from "mongoose";
 
-const GenSchema = mongoose.Schema(
+const RideSchema = mongoose.Schema(
     {
         user: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Users', // Reference to the UserModel
             required: true
         },
-        firstName: {
+        role: {
+            type: String,
+            enum: ['passenger', 'driver'], // Specify the role (passenger or driver)
+            required: true
+        },
+        pickupLocation: {
             type: String,
             required: true
         },
-        lastName: {
+        dropLocation: {
             type: String,
             required: true
         },
-        location: {
+        number: {
             type: String,
             required: true
         },
-        workingCompany: {
-            type: String,
-            required: true
-        },
-        linkURL: {
-            type: String,
-        },
-        contactNumber: {
-            type: String,
-            required: true
-        },
-        birthDay: {
-            type: Date,
-            required: true
-        },
-        description: {
+        estimate: {
             type: String,
             required: true
         }
@@ -42,6 +32,6 @@ const GenSchema = mongoose.Schema(
     { timestamps: true }
 );
 
-const GeneralUserModel = mongoose.model('genUsers', GenSchema);
+const RideModel = mongoose.model('ride', RideSchema);
 
-export default GeneralUserModel;
+export default RideModel;
