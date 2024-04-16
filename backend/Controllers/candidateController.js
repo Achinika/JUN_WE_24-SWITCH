@@ -1,4 +1,4 @@
-import CandidatesApplications from '../models/model.js';
+/*import CandidatesApplications from '../Models/candidateModel';
 
 // Apply for a job
 export const applyForJob = async (req, res) => {
@@ -25,3 +25,4 @@ export const applyForJob = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+*/
