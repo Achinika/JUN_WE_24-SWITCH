@@ -25,13 +25,13 @@ const EmpSchema = mongoose.Schema(
         },
         linkURL: {
             type: String,
-            validate: {
+            /*alidate: {
                 validator: function (v) {
                     // Check if the URL is valid (basic validation)
                     return /^(ftp|http|https):\/\/[^ "]+$/.test(v);
                 },
                 message: props => `${props.value} is not a valid URL!`
-            }
+            }*/
         },
         contactNumber: {
             type: String,
