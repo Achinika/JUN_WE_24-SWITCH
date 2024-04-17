@@ -35,34 +35,54 @@ try{
 };
 
 //login all users
-export const loginUser = async (req, res)=>{
-    const {email, password}= req.body
+export const loginUser = async (req, res) => {
+    const { email, password } = req.body;
+
     try {
-        const user = await UserModel.findOne({email:email})
-        console.log("User found:", user); // Debug log
+        // Find the user by email
+        const user = await UserModel.findOne({ email });
 
-        
-        if(user) //if user exist
-        {
-            const isValid = await bcrypt.compare(password, user.password) //check password validity
-            console.log("Password valid:", isValid); // Debug log
-            
-            if (isValid) {
-                 // Generate JWT token
-                 const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
 
-                 // Return response with token and user data
-                 return res.status(200).json({ token, user });
+        // Check password validity
+        const isValidPassword = await bcrypt.compare(password, user.password);
 
+        if (!isValidPassword) {
+            return res.status(400).json({ message: "Incorrect password" });
+        }
+
+        // Generate JWT token with expiration time (1 hour)
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+        // Return response with token and user data
+        res.status(200).json({ token, user });
+
+    } catch (error) {
+        console.error("Error:", error);
+        res.status(500).json({ message: error.message });
+    }
+};
+
+// Middleware to verify token expiration
+export const verifyTokenExpiration = (req, res, next) => {
+    const token = req.headers.authorization; // Assuming token is sent in the Authorization header
+
+    if (!token) {
+        return res.status(401).json({ message: "Token not provided" });
+    }
+
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+            if (err.name === 'TokenExpiredError') {
+                return res.status(401).json({ message: "Token expired, please login again" });
             } else {
-                return res.status(400).json("Wrong Password");
+                return res.status(401).json({ message: "Invalid token" });
             }
         }
-        else{
-            res.status(404).json("User does not exist")
-        }
-    } catch (error) {
-        console.error("Error:", error); // Debug log
-        return  res.status(500).json ({message:error.message}) ;// Handle error if any
-    }
-}
+
+        req.userId = decoded.userId;
+        next(); // Proceed to next middleware or route handler
+    });
+};

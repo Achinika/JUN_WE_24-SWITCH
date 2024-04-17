@@ -41,6 +41,12 @@ export const updateToEmployer = async (req, res) => {
         // Save the new employer details
         const savedEmployer = await newEmployer.save();
 
+        // Update the userType field in the UserModel to 'employer'
+        user.accountType = 'employer';
+
+        // Save the updated user document
+        await user.save();
+
         res.status(200).json(savedEmployer);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -74,21 +80,7 @@ export const updateEmpDetails = async (req, res) => {
     const userId = req.params.userId;
 
     try {
-        // Extract the token from the request headers
-        const token = req.headers.authorization.split(' ')[1];
-
-        // Verify the token to obtain user data, including the user ID
-        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-
-        // Extract the user ID from the decoded token
-        const loggedInUserId = decodedToken.userId;
-
-        // Check if the user ID in the request matches the logged-in user ID
-        if (userId !== loggedInUserId) {
-            return res.status(403).json({ message: "You are not authorized to perform this action" });
-        }
-
-        // Retrieve the existing employer document
+        // Retrieve the existing employer document for the specified user ID
         let employer = await EmployerModel.findOne({ user: userId });
 
         // Check if employer exists
@@ -96,29 +88,57 @@ export const updateEmpDetails = async (req, res) => {
             return res.status(404).json({ message: "Employer not found" });
         }
 
-        // Update employer details with the new data from the request body
-        const { firstName, lastName, email, location, workingCompany, linkURL, contactNumber, birthDay, description, profilePic, coverPic } = req.body;
+        // Extract the token from the request headers
+        const token = req.headers.authorization.split(' ')[1];
 
-        employer.firstName = firstName;
-        employer.lastName = lastName;
-        employer.email = email;
-        employer.location = location;
-        employer.workingCompany = workingCompany;
-        employer.linkURL = linkURL;
-        employer.contactNumber = contactNumber;
-        employer.birthDay = birthDay;
-        employer.description = description;
-        employer.profilePic = profilePic;
-        employer.coverPic = coverPic;
+        // Verify the token to obtain user data, including the user ID
+        try {
+            const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
 
-        // Save the updated employer document
-        employer = await employer.save();
+            // Extract the user ID from the decoded token
+            const loggedInUserId = decodedToken.userId;
 
-        // Return the updated employer data as a response
-        res.status(200).json(employer);
+            // Check if the user ID in the request matches the logged-in user ID
+            if (userId !== loggedInUserId) {
+                return res.status(403).json({ message: "You are not authorized to perform this action" });
+            }
+
+            // Update employer details with the new data from the request body
+            const { firstName, lastName, email, location, workingCompany, linkURL, contactNumber, birthDay, description, profilePic, coverPic } = req.body;
+
+            employer.firstName = firstName;
+            employer.lastName = lastName;
+            employer.email = email; // Only update email if required
+            employer.location = location;
+            employer.workingCompany = workingCompany;
+            employer.linkURL = linkURL;
+            employer.contactNumber = contactNumber;
+            employer.birthDay = birthDay;
+            employer.description = description;
+            employer.profilePic = profilePic;
+            employer.coverPic = coverPic;
+
+            // Save the updated employer document
+            employer = await employer.save();
+
+            // Return the updated employer data as a response
+            res.status(200).json(employer);
+        } catch (jwtError) {
+            if (jwtError instanceof jwt.TokenExpiredError) {
+                // Token has expired, send an error response indicating the need to re-login
+                return res.status(401).json({ message: "Token has expired, please log in again" });
+            } else {
+                // Other JWT verification errors
+                throw jwtError;
+            }
+        }
     } catch (error) {
+        // Handle database and other errors
         res.status(500).json({ message: error.message });
     }
+       
+
+        
 };
 
 //delete Employer account from both db
@@ -169,7 +189,7 @@ export const addJobAdvt = async (req, res) => {
         }
 
         // Extract job details from request body
-        const { jobTitle, jobDescription, postedDate, closingDate, experienceLevel, company, location, jobType, contactNumber, contactEmail } = req.body;
+        const { jobTitle, jobDescription, postedDate, closingDate, experienceLevel,minEduLevel, company, location, jobType, contactNumber, contactEmail } = req.body;
 
         // Create a new Job model instance
         const newJob = new JobModel({
@@ -179,6 +199,7 @@ export const addJobAdvt = async (req, res) => {
             postedDate,
             closingDate,
             experienceLevel,
+            minEduLevel,
             company,
             location,
             jobType,
@@ -209,7 +230,7 @@ export const updateJobAdvt = async (req, res) => {
         }
 
         // Extract updated job details from request body
-        const { jobTitle, jobDescription, postedDate, closingDate, experienceLevel, company, location, jobType, contactNumber, contactEmail } = req.body;
+        const { jobTitle, jobDescription, postedDate, closingDate, experienceLevel,minEduLevel, company, location, jobType, contactNumber, contactEmail } = req.body;
 
         // Update job advertisement fields with new values
         job.jobTitle = jobTitle;
@@ -217,6 +238,7 @@ export const updateJobAdvt = async (req, res) => {
         job.postedDate = postedDate;
         job.closingDate = closingDate;
         job.experienceLevel = experienceLevel;
+        job.minEduLevel = minEduLevel;
         job.company = company;
         job.location = location;
         job.jobType = jobType;

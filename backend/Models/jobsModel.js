@@ -4,6 +4,8 @@ const { Schema } = mongoose;
 
 // Define enums for experience levels
 const experienceLevelEnum = ['Intern', 'Entry Level', 'Mid Level','Senior Level', 'Executive Level'];
+// Define enums for experience levels
+const minEduLevelLevelEnum = ['A/L', 'NVQ Level-4', ' HND','Associate Degree', 'Bachelor Degree', 'Master Degree', 'PhD'];
 
 // Define enums for job types
 const jobTypeEnum = ['Remote', 'Physical'];
@@ -11,7 +13,7 @@ const jobTypeEnum = ['Remote', 'Physical'];
 const jobSchema = new Schema({
     employer: {
         type: Schema.Types.ObjectId,
-        ref: 'Employer'
+        ref: 'empUsers'
     },
     jobTitle: {
         type: String,
@@ -40,6 +42,11 @@ const jobSchema = new Schema({
     experienceLevel: {
         type: String,
         enum: experienceLevelEnum,
+        required: true
+    },
+    minEduLevel: {
+        type: String,
+        enum: minEduLevelLevelEnum,
         required: true
     },
     company: {
