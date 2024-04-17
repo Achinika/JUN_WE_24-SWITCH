@@ -1,15 +1,15 @@
-/*import mongoose from 'mongoose';
+import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
 // Define enums for experience levels
-const experienceLevelEnum = ['Intern', 'Entry Level', 'Mid Level','Senior Level', 'Executive Level'];
+const experienceLevelEnum = ['Intern', 'Entry Level', 'Mid Level', 'Senior Level', 'Executive Level'];
 
-// Define enums for job types
-const minimumEduLevelEnum = ['PhD Degree', 'MasterDegree', 'Bachalor Degree', 'Associate Degree', 'HND', 'NVQ Level-4', 'A/L'];
+// Define enums for education levels
+const educationLevelEnum = ['High School', 'Associate Degree', 'Bachelor\'s Degree', 'Master\'s Degree', 'PhD'];
 
-const candiApplicationSchema = new Schema({
-    jobId: {
+const candidateSchema = new Schema({
+    job: {
         type: Schema.Types.ObjectId,
         ref: 'Job',
         required: true
@@ -31,18 +31,26 @@ const candiApplicationSchema = new Schema({
         enum: experienceLevelEnum,
         required: true
     },
-   
-    minimumEduLevel: {
+    minEducationLevel: {
         type: String,
-        enum: minimumEduLevelEnum,
+        enum: educationLevelEnum,
         required: true
     },
-    uploadFile: {
+    description: {
         type: String,
+        required: true
+    },
+    cv: {
+        type: String, // This could be a path to a file or a cloud storage URI
+        required: true
+    },
+    appliedDate: {
+        type: Date,
+        default: Date.now,
         required: true
     }
 });
 
-const CandidatesApplications = mongoose.model('CandidatesApplications', candiApplicationSchema);
+const CandidateModel = mongoose.model('Candidate', candidateSchema);
 
-export default CandidatesApplications;*/
+export default CandidateModel;
