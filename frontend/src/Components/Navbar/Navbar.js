@@ -2,15 +2,20 @@ import React from 'react';
 import "./Navbar.css";
 import appIcon from "../../img/navLogo.png";
 import searchIcon from "../../img/icons/searchIcon.png";
+
 import { Home, People, Work, Business, Notifications, Message } from '@material-ui/icons'; 
 
 export default function Navbar(){
     return(
         <div className = 'mainNavbar'>
             <div className = 'header'>
-                <img src={`${appIcon}`} alt="" className='appIcon'/>
+                <div className='logo'>
+                    <img src={`${appIcon}`} alt="" className='appIcon'/>
+                </div>
                 <div className='searchBox'>
-                    <div searchIcon><img src={`${searchIcon}`} alt="" /></div>
+                    <button className="search-button">
+                        <img src={`${searchIcon}`} alt="" />
+                     </button>
                     <input type="text" placeholder="Search"/>                 
                 </div>
                 <div className='navBar-menu'>
@@ -22,11 +27,10 @@ export default function Navbar(){
                     <a href="#messages"><Message style={{ color: '#873B78' }} /></a>
                 </div>
 
-                <div className='nav-profile'>
-                    <div className='profileCircle'>
-                         {/* Add profile picture */}
-                    </div>
-                </div>
+                <button className='nav-profile'>
+                 <img src="icon-4.png" alt="Profile" />
+                    
+                </button>
                 
             </div>
         </div>
