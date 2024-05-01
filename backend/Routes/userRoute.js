@@ -15,7 +15,7 @@ import { addproduct, updateProduct, deleteProduct } from '../Controllers/busines
 
 
 import { addJobAdvt,updateJobAdvt,deleteJobAdvt  } from "../Controllers/empController.js";
-//import{applyForJob} from "../Controllers/candidateController.js";
+
 
 import{followUser} from '../Controllers/allUsersController.js';
 
@@ -55,13 +55,13 @@ router.delete('/delete/ride/:userId', deleteRideAccount); //delet RIDESHARING
 
 //FOR EMPLOYERS
 router.get('/emp/:userId', getEmployer); //get a Employer
-router.patch('/update/emp/:userId', updateEmpDetails); //update epmloyer
+router.patch('/emp/update/:userId', updateEmpDetails); //update epmloyer
 router.delete('/emp/:userId',deleteEmpAccount); //delete employer
 router.post('/emp/addjob/:userId',addJobAdvt ); //add job post for employer
 router.patch('/emp/editJob/:jobId', updateJobAdvt); //edit job post for employers
 router.delete('/emp/deleteJob/:jobId', deleteJobAdvt); //delete job post for employers
 //candidates
-//router.post('/apply/:jobId',applyForJob ); //add job post for employer
+
 
 
 

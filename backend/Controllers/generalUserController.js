@@ -155,5 +155,3 @@ export const deleteGenAccount =async(req,res) => {
     }
 }
 
-   
-

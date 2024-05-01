@@ -1,0 +1,57 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    color: #fff;
+}
+.logo img {
+    width: 200px; 
+}
+.searchBox {
+    margin: 0 20px;
+    width: 400px;
+    display: flex;
+    align-items: center;
+}
+.search-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+.search-button img {
+    width: 30px; 
+}
+.searchBox input[type="text"] {
+    border: 1px solid #ccc;
+    height: 30px;
+    width: 400px;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 16px;
+}
+.navBar-menu{
+    overflow: hidden;
+}
+
+  
+
+.navBar-menu a {
+    color: #fff;
+    text-decoration: none;
+    position: left;
+    margin: 40px;
+    justify-content: space-between;
+    align-items: center;
+    
+
+    
+}
+  
+.nav-profile img {
+    width: 100px; /* Adjust as needed */
+    border-radius: 50%; /* Make it round */
+    
+}
